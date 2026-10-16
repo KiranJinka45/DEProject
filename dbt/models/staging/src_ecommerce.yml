@@ -1,0 +1,53 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: ecommerce_warehouse
+    schema: bronze
+    description: "Raw ingested transactional and event data in Bronze layer"
+    tables:
+      - name: bronze_orders
+        description: "Raw e-commerce orders ingested from OLTP or message queues"
+        columns:
+          - name: order_id
+            description: "Primary identifier for order"
+            tests:
+              - not_null
+          - name: _load_ts
+            description: "Audit load timestamp"
+            tests:
+              - not_null
+
+      - name: bronze_order_items
+        description: "Raw order line items"
+        columns:
+          - name: order_item_id
+            tests:
+              - not_null
+          - name: order_id
+            tests:
+              - not_null
+
+      - name: bronze_customers
+        description: "Raw customer profile extracts"
+        columns:
+          - name: customer_id
+            tests:
+              - not_null
+
+      - name: bronze_products
+        description: "Raw catalog and SKU data"
+        columns:
+          - name: product_id
+            tests:
+              - not_null
+
+      - name: bronze_marketing_spend
+        description: "Ad platform campaign spend ingested daily via API"
+        columns:
+          - name: campaign_id
+            tests:
+              - not_null
+          - name: spend_date
+            tests:
+              - not_null

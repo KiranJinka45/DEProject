@@ -1,0 +1,22 @@
+ecommerce_dw:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('WAREHOUSE_HOST', 'localhost') }}"
+      user: "{{ env_var('WAREHOUSE_USER', 'dw_admin') }}"
+      password: "{{ env_var('WAREHOUSE_PASSWORD', 'dw_secure_pass') }}"
+      port: "{{ env_var('WAREHOUSE_PORT', '5432') | int }}"
+      dbname: "{{ env_var('WAREHOUSE_DB', 'ecommerce_warehouse') }}"
+      schema: public
+      threads: 4
+      keepalives_idle: 0
+    prod:
+      type: postgres
+      host: "{{ env_var('WAREHOUSE_HOST', 'postgres-warehouse') }}"
+      user: "{{ env_var('WAREHOUSE_USER', 'dw_admin') }}"
+      password: "{{ env_var('WAREHOUSE_PASSWORD', 'dw_secure_pass') }}"
+      port: 5432
+      dbname: "{{ env_var('WAREHOUSE_DB', 'ecommerce_warehouse') }}"
+      schema: public
+      threads: 8

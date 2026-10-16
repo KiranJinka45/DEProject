@@ -1,0 +1,18 @@
+-- Create analytical warehouse user and database alongside Airflow metadata database
+CREATE USER dw_admin WITH PASSWORD 'dw_secure_pass';
+
+CREATE DATABASE ecommerce_warehouse OWNER dw_admin;
+
+\connect ecommerce_warehouse
+
+CREATE SCHEMA IF NOT EXISTS bronze AUTHORIZATION dw_admin;
+CREATE SCHEMA IF NOT EXISTS silver AUTHORIZATION dw_admin;
+CREATE SCHEMA IF NOT EXISTS gold AUTHORIZATION dw_admin;
+CREATE SCHEMA IF NOT EXISTS audit AUTHORIZATION dw_admin;
+
+GRANT ALL PRIVILEGES ON DATABASE ecommerce_warehouse TO dw_admin;
+GRANT ALL PRIVILEGES ON ALL SCHEMAS IN DATABASE ecommerce_warehouse TO dw_admin;
+ALTER DEFAULT PRIVILEGES IN SCHEMA bronze GRANT ALL ON TABLES TO dw_admin;
+ALTER DEFAULT PRIVILEGES IN SCHEMA silver GRANT ALL ON TABLES TO dw_admin;
+ALTER DEFAULT PRIVILEGES IN SCHEMA gold GRANT ALL ON TABLES TO dw_admin;
+ALTER DEFAULT PRIVILEGES IN SCHEMA audit GRANT ALL ON TABLES TO dw_admin;

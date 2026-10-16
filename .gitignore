@@ -1,0 +1,85 @@
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Coverage
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE & OS Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Airflow runtime files
+logs/
+airflow_logs/
+*.pid
+airflow.db
+standalone_admin_password.txt
+
+# Environment variables & secrets
+.env
+*.env.local
+*.pem
+*.key
+credentials.json
+service_account.json
+
+# Local Data Storage & Staging
+data/raw/*
+data/bronze/*
+data/silver/*
+data/gold/*
+!data/raw/.gitkeep
+!data/bronze/.gitkeep
+!data/silver/.gitkeep
+!data/gold/.gitkeep
+
+# dbt Artifacts
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# MinIO / Local Object Store Data
+.minio.sys/
+minio_data/
+
+# DuckDB / Postgres local files
+*.duckdb
+*.duckdb.wal
+postgres_data/

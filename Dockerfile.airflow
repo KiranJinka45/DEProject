@@ -1,0 +1,22 @@
+FROM apache/airflow:2.9.3-python3.11
+
+USER root
+# Install OpenJDK for PySpark capabilities and build tools
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       default-jre-headless \
+       procps \
+       gcc \
+       python3-dev \
+       libpq-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+USER airflow
+
+# Upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
+
+# Install project-specific dependencies
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
